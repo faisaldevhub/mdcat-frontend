@@ -68,6 +68,8 @@ function processQueue(error: unknown, token: string | null) {
   failedQueue = [];
 }
 
+import { getRefreshTokenCookie, deleteRefreshTokenCookie } from "@/lib/auth-cookies";
+
 apiClient.interceptors.response.use(
   // Success — pass through
   (response) => response,
@@ -106,10 +108,7 @@ apiClient.interceptors.response.use(
     isRefreshing = true;
 
     try {
-      const refreshToken =
-        typeof window !== "undefined"
-          ? localStorage.getItem("mdcat_refresh_token")
-          : null;
+      const refreshToken = getRefreshTokenCookie();
 
       if (!refreshToken) {
         throw new Error("No refresh token available");
@@ -139,7 +138,7 @@ apiClient.interceptors.response.use(
       useAuthStore.getState().clearAuth();
 
       if (typeof window !== "undefined") {
-        localStorage.removeItem("mdcat_refresh_token");
+        deleteRefreshTokenCookie();
         window.location.href = `${ROUTES.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`;
       }
 

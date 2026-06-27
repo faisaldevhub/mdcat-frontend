@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { getQueryClient } from "@/lib/query-client";
 import { Toaster } from "@/components/shared/toaster";
 
+import { AuthProvider } from "@/components/providers/auth-provider";
+
 // =============================================================================
 // Global Providers
 // =============================================================================
@@ -18,10 +20,12 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider delay={300}>
-        {children}
-        <Toaster />
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider delay={300}>
+          {children}
+          <Toaster />
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
