@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
 // =============================================================================
 // Font Configuration
 // =============================================================================
-// Inter is the primary font per the Stitch design system.
+// Inter — body text (as specified in Stitch design palette)
+// Poppins — headings (as specified in Stitch design palette)
 
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
+});
+
+const poppins = Poppins({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 // =============================================================================
@@ -20,20 +28,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "MDCAT Platform — Exam Preparation",
-    template: "%s | MDCAT Platform",
+    default: "MDCAT in Second — Practice Smarter. Analyze Better. Score Higher.",
+    template: "%s | MDCAT in Second",
   },
   description:
-    "Comprehensive MDCAT exam preparation platform with practice quizzes, analytics, gamification, and personalized study plans.",
+    "The medical-grade Q-Bank built for Pakistan's top MDCAT aspirants. Master every subject with detailed analytics, exam-precision timed quizzes, and full-length simulations.",
 };
 
 // =============================================================================
 // Root Layout
 // =============================================================================
-// All pages inherit from this layout. It provides:
-// - HTML structure with lang and font
-// - Global providers (TanStack Query)
-// - CSS variables for Tailwind
 
 export default function RootLayout({
   children,
@@ -41,7 +45,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${poppins.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <body className="min-h-full flex flex-col font-sans">
         <Providers>{children}</Providers>
       </body>
