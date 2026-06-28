@@ -69,7 +69,7 @@ export function ContinueLearningCard() {
                 <Link
                   href={
                     continueLearning.collection_id
-                      ? `${ROUTES.COLLECTIONS}/${continueLearning.collection_id}`
+                      ? ROUTES.QUIZ_START(continueLearning.collection_id)
                       : ROUTES.SUBJECTS
                   }
                 />

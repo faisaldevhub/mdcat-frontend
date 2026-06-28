@@ -26,6 +26,12 @@ export const ROUTES = {
   NOTIFICATIONS: "/notifications",
   PROFILE: "/profile",
   SETTINGS: "/settings",
+
+  // Dynamic quiz routes
+  QUIZ_START: (collectionId: number) => `/quiz/start/${collectionId}` as const,
+  QUIZ_ATTEMPT: (attemptId: number) => `/quiz/${attemptId}` as const,
+  QUIZ_RESULT: (attemptId: number) => `/quiz/${attemptId}/result` as const,
+  QUIZ_REVIEW: (attemptId: number) => `/quiz/${attemptId}/review` as const,
 } as const;
 
 /**
